@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="color-scheme" content="only light">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Weekly ruby-bench results comparing Ruby's default GC with MMTk StickyImmix heap modes.">
+  <title>MMTkBench</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/styles.css" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/highcharts@12.4.0/highcharts.js"></script>
+  <script defer src="assets/site.js"></script>
+  <script defer src="assets/dashboard.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">MMTkBench</a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a href="hardware.html" class="nav-link">Hardware</a></li>
+        <li class="nav-item"><a href="https://github.com/peterzhu2118/mmtk-benchmark" class="nav-link">Source</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container-fluid px-4">
+    <h2 class="text-center">ruby-bench × MMTk</h2>
+    <p class="text-center text-muted suite-description">Ruby's default GC compared with MMTk StickyImmix</p>
+
+    <div class="benchmarks-wrapper">
+      <div class="snapshot-heading text-center">
+        <h4>Benchmark results on <span id="benchmark-date">…</span></h4>
+        <a id="benchmark-revision" class="revision-link" href="https://github.com/ruby/ruby">Ruby revision …</a>
+        <div class="weekly-picker">
+          <label for="week-select">Week</label>
+          <select id="week-select" class="form-select form-select-sm" aria-label="Benchmark week"></select>
+        </div>
+      </div>
+
+      <section class="benchmark-page" aria-label="Benchmark dashboard">
+        <div class="text-center">
+          <div id="category-switcher" class="category-switcher" role="group" aria-label="Benchmark category"></div>
+        </div>
+        <div id="dashboard-status" class="chart-status" role="status">Loading benchmark data…</div>
+        <div id="dashboard-chart" class="benchmark-graph dashboard-graph" hidden></div>
+        <div class="text-center metric-switcher" role="group" aria-label="Dashboard metric">
+          <label class="form-check form-check-inline metric-type">
+            <input class="form-check-input" name="metric_type" type="radio" value="speed" checked>
+            Speed
+          </label>
+          <label class="form-check form-check-inline metric-type">
+            <input class="form-check-input" name="metric_type" type="radio" value="memory">
+            Memory
+          </label>
+        </div>
+      </section>
+    </div>
+
+    <table class="benchmarks-table table table-striped">
+      <thead><tr><th>Category</th><th>Benchmarks</th></tr></thead>
+      <tbody id="benchmark-list"><tr><td colspan="2">Loading…</td></tr></tbody>
+    </table>
+    <noscript><p class="text-center">JavaScript is required to render the benchmark graphs.</p></noscript>
+  </main>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p class="text-muted">
+        Maintained by <a href="https://github.com/peterzhu2118">@peterzhu2118</a>.
+        Benchmarks from <a href="https://github.com/ruby/ruby-bench">ruby/ruby-bench</a>.<br>
+        Data and source at <a href="https://github.com/peterzhu2118/mmtk-benchmark">peterzhu2118/mmtk-benchmark</a>.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

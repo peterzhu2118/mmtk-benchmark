@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "frequency": "weekly",
+  "plan": "StickyImmix",
+  "generated_at": "2026-11-05T16:43:03Z",
+  "variants": {
+    "baseline": {
+      "label": "Ruby",
+      "description": "Ruby without modular GC",
+      "environment": {},
+      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM [x86_64-linux]"
+    },
+    "modular_default": {
+      "label": "Modular GC (default)",
+      "description": "Ruby configured with modular GC, using the default GC",
+      "environment": {},
+      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM +GC [x86_64-linux]"
+    },
+    "mmtk_dynamic": {
+      "label": "MMTk (dynamic)",
+      "description": "StickyImmix with MemBalancer heap sizing",
+      "environment": {
+        "RUBY_GC_LIBRARY": "mmtk",
+        "MMTK_PLAN": "StickyImmix",
+        "MMTK_HEAP_MODE": "dynamic"
+      },
+      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM +GC[mmtk] [x86_64-linux]"
+    },
+    "mmtk_ruby": {
+      "label": "MMTk (ruby)",
+      "description": "StickyImmix with Ruby-style free-slot heap sizing",
+      "environment": {
+        "RUBY_GC_LIBRARY": "mmtk",
+        "MMTK_PLAN": "StickyImmix",
+        "MMTK_HEAP_MODE": "ruby"
+      },
+      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM +GC[mmtk] [x86_64-linux]"
+    },
+    "mmtk_cpu": {
+      "label": "MMTk (cpu)",
+      "description": "StickyImmix with GC CPU-overhead heap sizing",
+      "environment": {
+        "RUBY_GC_LIBRARY": "mmtk",
+        "MMTK_PLAN": "StickyImmix",
+        "MMTK_HEAP_MODE": "cpu"
+      },
+      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM +GC[mmtk] [x86_64-linux]"
+    }
+  },
+  "runs": [
+    {
+      "date": "2026-10-29",
+      "path": "results/2026-10-29.json",
+      "ruby_revision": "14733af5effb025b12cc9c8957893afeebae041e",
+      "ruby_committed_at": "2026-10-29T16:59:58-07:00",
+      "ruby_bench_revision": "73918b2fc1a84702fea63e06f64d179751d69df4",
+      "benchmark_count": 16
+    },
+    {
+      "date": "2026-11-05",
+      "path": "results/2026-11-05.json",
+      "ruby_revision": "46020b782b11a8cd3926cf0ec918ef2cbf5ec6b1",
+      "ruby_committed_at": "2026-11-05T10:34:19-05:00",
+      "ruby_bench_revision": "00f0f8beab27edb11c0253cc630f91f17d1f1891",
+      "benchmark_count": 16
+    }
+  ]
+}

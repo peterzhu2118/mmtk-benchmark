@@ -1,0 +1,95 @@
+body {
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: #fff;
+}
+
+a { color: rgba(0, 0, 0, 0.7); }
+a:focus, a:hover { color: rgba(0, 0, 0, 0.6); }
+.navbar { border-bottom: 1px solid #f0f0f0; margin-bottom: 28px; }
+.navbar-brand { color: #222; font-weight: 600; letter-spacing: -0.02em; }
+.nav-link { padding: 8px 12px; }
+.suite-description { margin-top: -8px; }
+
+.benchmark-page {
+  width: min(76%, 1160px);
+  margin: 0 auto;
+}
+
+.benchmark-graph {
+  width: 100%;
+  height: 500px;
+  margin: 34px auto 12px;
+}
+
+.benchmark-graph.dashboard-graph { height: 680px; }
+.benchmarks-wrapper { margin-bottom: 34px; }
+.snapshot-heading h4 { margin-bottom: 6px; font-weight: 400; }
+.revision-link { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; text-decoration: none; }
+.weekly-picker { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; }
+.weekly-picker label { color: #666; font-size: 14px; }
+.weekly-picker select { width: auto; min-width: 160px; }
+
+.category-switcher {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 22px;
+  padding: 4px;
+  background: #eef1f4;
+  border-radius: 24px;
+}
+
+.category-switch {
+  border: 0;
+  background: transparent;
+  padding: 6px 24px;
+  border-radius: 999px;
+  color: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.category-switch:hover { color: rgba(0, 0, 0, 0.8); }
+.category-switch.active { background: #fff; color: rgba(0, 0, 0, 0.85); font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); }
+.category-switch:focus-visible { outline: 2px solid #3285e1; outline-offset: 1px; }
+
+.metric-switcher { margin: 16px 0 6px; }
+.metric-type { margin: 0 12px; }
+.metric-type input { margin-right: 6px; }
+.chart-status { min-height: 240px; display: grid; place-items: center; color: #777; text-align: center; padding: 50px 15px; }
+.chart-status.error { color: #a62b2b; }
+.chart-help { font-size: 13px; text-align: center; margin-top: 18px; }
+.history-page h1 { font-size: 40px; }
+.benchmark-navbar { margin: 20px auto 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; }
+.benchmark-navbar .nav-link { padding: 8px 11px; font-size: 14px; }
+.highcharts-xaxis-labels a { text-decoration: none; }
+
+.benchmarks-table {
+  width: min(76%, 1160px);
+  margin: 0 auto 60px;
+}
+.benchmarks-table a { text-decoration: underline; }
+.margined-links a { display: inline-block; margin: 2px 12px 2px 0; }
+.empty-table { color: #777; }
+.footer { margin-top: 40px; padding: 15px 0 30px; }
+
+.methodology-table { margin-top: 35px; }
+.methodology-table td:first-child { width: 28%; font-weight: 500; }
+.methodology-notes { width: min(76%, 1160px); margin: 0 auto 50px; }
+.methodology-notes h3 { margin-bottom: 18px; font-size: 24px; }
+.methodology-notes code { white-space: normal; overflow-wrap: anywhere; }
+
+@media (max-width: 850px) {
+  .container-fluid.px-4 { padding-left: 15px !important; padding-right: 15px !important; }
+  .benchmark-page, .benchmarks-table, .methodology-notes { width: 100%; }
+  .benchmark-graph.dashboard-graph { height: 600px; }
+  .category-switch { padding: 6px 16px; }
+}
+
+@media (max-width: 520px) {
+  .benchmark-graph { height: 450px; }
+  .benchmark-graph.dashboard-graph { height: 570px; }
+  .benchmarks-table { font-size: 13px; }
+  .category-switch { padding: 5px 12px; }
+  .metric-type { margin: 0 7px; }
+}

@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative "../lib/mmtk_benchmark"
+
+begin
+  options = MMTkBenchmark::Options.parse(ARGV)
+  MMTkBenchmark::Runner.new(options).run
+rescue OptionParser::ParseError, ArgumentError => error
+  warn "error: #{error.message}"
+  warn "Run bin/benchmark --help for usage."
+  exit 2
+rescue MMTkBenchmark::CommandError => error
+  warn "error: #{error.message}"
+  exit 1
+rescue Interrupt
+  warn "Interrupted"
+  exit 130
+end
