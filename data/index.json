@@ -2,7 +2,7 @@
   "schema_version": 1,
   "frequency": "weekly",
   "plan": "StickyImmix",
-  "generated_at": "2026-11-05T16:43:03Z",
+  "generated_at": "2026-11-06T08:48:36Z",
   "variants": {
     "baseline": {
       "label": "Ruby",
@@ -48,6 +48,54 @@
     }
   },
   "runs": [
+    {
+      "date": "2026-09-17",
+      "path": "results/2026-09-17.json",
+      "ruby_revision": "261685fd25405c46ea29749000ebf4dc7fb3582e",
+      "ruby_committed_at": "2026-09-18T07:36:37+09:00",
+      "ruby_bench_revision": "17dcac94f1b11d637abc2d4e132ce69f8fac4241",
+      "benchmark_count": 16
+    },
+    {
+      "date": "2026-09-24",
+      "path": "results/2026-09-24.json",
+      "ruby_revision": "e684c7bad3c884dfc1f8693b2557a7b6925114bf",
+      "ruby_committed_at": "2026-09-25T08:59:37+09:00",
+      "ruby_bench_revision": "17dcac94f1b11d637abc2d4e132ce69f8fac4241",
+      "benchmark_count": 16
+    },
+    {
+      "date": "2026-10-01",
+      "path": "results/2026-10-01.json",
+      "ruby_revision": "9f323525f8194f7670a1519d81a27cfb41dc9306",
+      "ruby_committed_at": "2026-10-02T07:36:48+09:00",
+      "ruby_bench_revision": "17dcac94f1b11d637abc2d4e132ce69f8fac4241",
+      "benchmark_count": 16
+    },
+    {
+      "date": "2026-10-08",
+      "path": "results/2026-10-08.json",
+      "ruby_revision": "89721355717d65bc64f1b6b39a378a8cbf0e6b8c",
+      "ruby_committed_at": "2026-10-09T08:56:20+09:00",
+      "ruby_bench_revision": "496148ad7058b49c0d1b53f2486a87aa23d4e9c3",
+      "benchmark_count": 16
+    },
+    {
+      "date": "2026-10-15",
+      "path": "results/2026-10-15.json",
+      "ruby_revision": "8c82ca2c3f1e130f5adc6883873b3abd951a8ab3",
+      "ruby_committed_at": "2026-10-16T08:48:20+09:00",
+      "ruby_bench_revision": "33af640a06daa4b6d021e718c693f4006024a939",
+      "benchmark_count": 16
+    },
+    {
+      "date": "2026-10-22",
+      "path": "results/2026-10-22.json",
+      "ruby_revision": "cc57f9c81852b37ea3bc2f29359bdf3237c2ab6d",
+      "ruby_committed_at": "2026-10-22T17:51:23-04:00",
+      "ruby_bench_revision": "ab26700c918dbbf101b6843e2efb8b1403f851b7",
+      "benchmark_count": 16
+    },
     {
       "date": "2026-10-29",
       "path": "results/2026-10-29.json",
