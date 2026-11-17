@@ -4,13 +4,15 @@ A static dashboard comparing Ruby's default GC with MMTk StickyImmix using [ruby
 
 ## Run benchmarks
 
-Run all ruby-bench headline benchmarks for the latest weekly snapshot:
+MMTk is built with Rust 1.95 (installed automatically via rustup) and cross-language LTO, which requires the matching `clang-22` (`sudo apt install clang-22`). The run fails rather than silently building MMTk without LTO.
+
+Weekly snapshots are dated on Mondays. Run all ruby-bench headline benchmarks for this week's snapshot (the most recent Monday, using Ruby and ruby-bench commits up to the end of that Monday in UTC):
 
 ```sh
 bin/benchmark
 ```
 
-Backfill two headline-only weekly snapshots, ending today:
+Backfill two headline-only weekly snapshots, ending this week's Monday:
 
 ```sh
 bin/benchmark --weeks=2

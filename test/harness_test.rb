@@ -109,6 +109,14 @@ class OptionsTest < Minitest::Test
     assert_equal ["fib"], options.benchmarks
   end
 
+  def test_snapshot_dates_round_down_to_monday
+    assert_equal Date.new(2026, 11, 16), MMTkBenchmark::Options.monday_on_or_before(Date.new(2026, 11, 16))
+    assert_equal Date.new(2026, 11, 16), MMTkBenchmark::Options.monday_on_or_before(Date.new(2026, 11, 17))
+    assert_equal Date.new(2026, 11, 16), MMTkBenchmark::Options.monday_on_or_before(Date.new(2026, 11, 22))
+    assert_equal Date.new(2026, 11, 9), MMTkBenchmark::Options.parse(["--date", "2026-11-15"]).date
+    assert MMTkBenchmark::Options.parse([]).date.monday?
+  end
+
   def test_rejects_invalid_week_count
     assert_raises(ArgumentError) { MMTkBenchmark::Options.parse(["--weeks", "0"]) }
   end

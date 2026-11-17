@@ -2,19 +2,19 @@
   "schema_version": 1,
   "frequency": "weekly",
   "plan": "StickyImmix",
-  "generated_at": "2026-11-06T08:48:36Z",
+  "generated_at": "2026-11-17T05:40:14Z",
   "variants": {
     "baseline": {
       "label": "Ruby",
       "description": "Ruby without modular GC",
       "environment": {},
-      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM [x86_64-linux]"
+      "ruby_description": "ruby 4.1.0dev (2026-11-17T06:35:02Z HEAD e517096524) +PRISM [x86_64-linux]"
     },
     "modular_default": {
       "label": "Modular GC (default)",
       "description": "Ruby configured with modular GC, using the default GC",
       "environment": {},
-      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM +GC [x86_64-linux]"
+      "ruby_description": "ruby 4.1.0dev (2026-11-17T06:35:02Z HEAD e517096524) +PRISM +GC [x86_64-linux]"
     },
     "mmtk_dynamic": {
       "label": "MMTk (dynamic)",
@@ -24,7 +24,7 @@
         "MMTK_PLAN": "StickyImmix",
         "MMTK_HEAP_MODE": "dynamic"
       },
-      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM +GC[mmtk] [x86_64-linux]"
+      "ruby_description": "ruby 4.1.0dev (2026-11-17T06:35:02Z HEAD e517096524) +PRISM +GC[mmtk] [x86_64-linux]"
     },
     "mmtk_ruby": {
       "label": "MMTk (ruby)",
@@ -34,7 +34,7 @@
         "MMTK_PLAN": "StickyImmix",
         "MMTK_HEAP_MODE": "ruby"
       },
-      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM +GC[mmtk] [x86_64-linux]"
+      "ruby_description": "ruby 4.1.0dev (2026-11-17T06:35:02Z HEAD e517096524) +PRISM +GC[mmtk] [x86_64-linux]"
     },
     "mmtk_cpu": {
       "label": "MMTk (cpu)",
@@ -44,7 +44,7 @@
         "MMTK_PLAN": "StickyImmix",
         "MMTK_HEAP_MODE": "cpu"
       },
-      "ruby_description": "ruby 4.1.0dev (2026-11-06T00:34:19Z HEAD 46020b782b) +PRISM +GC[mmtk] [x86_64-linux]"
+      "ruby_description": "ruby 4.1.0dev (2026-11-17T06:35:02Z HEAD e517096524) +PRISM +GC[mmtk] [x86_64-linux]"
     }
   },
   "runs": [
@@ -110,6 +110,22 @@
       "ruby_revision": "46020b782b11a8cd3926cf0ec918ef2cbf5ec6b1",
       "ruby_committed_at": "2026-11-05T10:34:19-05:00",
       "ruby_bench_revision": "00f0f8beab27edb11c0253cc630f91f17d1f1891",
+      "benchmark_count": 16
+    },
+    {
+      "date": "2026-11-09",
+      "path": "results/2026-11-09.json",
+      "ruby_revision": "deaea318b10cee223a8f4a1e3bb674a76af703ea",
+      "ruby_committed_at": "2026-11-09T18:46:52-05:00",
+      "ruby_bench_revision": "ad63bf8cac618032adefdd1c5219636a52b47e5e",
+      "benchmark_count": 16
+    },
+    {
+      "date": "2026-11-16",
+      "path": "results/2026-11-16.json",
+      "ruby_revision": "e5170965241a31138de4b12f66a5f9d37e9d05fb",
+      "ruby_committed_at": "2026-11-16T16:35:02-05:00",
+      "ruby_bench_revision": "8083f572bb7f4691a764dd424f63cc14cf3367dc",
       "benchmark_count": 16
     }
   ]

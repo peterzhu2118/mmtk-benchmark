@@ -24,7 +24,7 @@ module MMTkBenchmark
     def self.parse(argv)
       root = File.expand_path("../..", __dir__)
       config = Config.new(
-        date: Date.today,
+        date: monday_on_or_before(Date.today),
         weeks: 1,
         categories: %w[headline],
         benchmarks: [],
@@ -46,7 +46,9 @@ module MMTkBenchmark
 
           Build Ruby directly on this machine and benchmark Ruby's default GC,
           modular Ruby's default GC, and MMTk StickyImmix with dynamic, ruby,
-          and cpu heap modes. Results are written to data/results/DATE.json.
+          and cpu heap modes. Weekly snapshots are dated on Mondays and use the
+          latest Ruby and ruby-bench commits up to the end of that Monday (UTC).
+          Results are written to data/results/DATE.json.
           By default, all headline benchmarks are run. Use --category to select
           other benchmark categories.
 
@@ -56,8 +58,8 @@ module MMTkBenchmark
             bin/benchmark --weeks 2 --category headline liquid-render psych-load
             bin/benchmark --quick --category micro fib object-new
         USAGE
-        opts.on("--date=YYYY-MM-DD", "latest weekly cutoff (default: today)") do |value|
-          config.date = Date.iso8601(value)
+        opts.on("--date=YYYY-MM-DD", "latest weekly snapshot, rounded down to a Monday (default: this week's Monday)") do |value|
+          config.date = monday_on_or_before(Date.iso8601(value))
         end
         opts.on("--weeks=N", Integer, "number of weekly points, including --date (default: 1)") do |value|
           config.weeks = value
@@ -111,6 +113,11 @@ module MMTkBenchmark
       config
     end
 
+    # Weekly snapshots are taken on Mondays.
+    def self.monday_on_or_before(date)
+      date - ((date.wday - 1) % 7)
+    end
+
     def self.validate!(config)
       raise ArgumentError, "--weeks must be at least 1" if config.weeks < 1
       raise ArgumentError, "--warmup must be nonnegative" if config.warmup < 0
@@ -130,6 +137,9 @@ module MMTkBenchmark
   class Runner
     RUBY_REPOSITORY = "https://github.com/ruby/ruby.git"
     RUBY_BENCH_REPOSITORY = "https://github.com/ruby/ruby-bench.git"
+    # MMTk is linked with cross-language LTO, which needs a Clang built on the
+    # same LLVM major version as rustc. Rust 1.95 uses LLVM 22 (clang-22).
+    RUST_TOOLCHAIN = "1.95"
 
     attr_reader :config
 
@@ -314,11 +324,26 @@ module MMTkBenchmark
     def build_mmtk(build_root, gc_dir)
       return if Dir[File.join(gc_dir, "librubygc.mmtk.*")].any?
 
-      puts "Building MMTk separately as a modular GC (release mode)"
-      sh("mmtk-#{File.basename(build_root)[0, 12]}",
+      revision = File.basename(build_root)[0, 12]
+      puts "Building MMTk separately as a modular GC (release mode, Rust #{RUST_TOOLCHAIN})"
+      sh("rustup-#{RUST_TOOLCHAIN}", "rustup", "toolchain", "install", RUST_TOOLCHAIN, "--profile", "minimal")
+      # Reconfigure from scratch so extconf picks the Clang matching the pinned
+      # rustc's LLVM rather than one cached from an earlier toolchain.
+      FileUtils.rm_rf(File.join(build_root, "modular-build", "gc", "mmtk"))
+      log_path = File.join(config.work_dir, "logs", "mmtk-#{revision}.log")
+      log_offset = File.size?(log_path) || 0
+      sh("mmtk-#{revision}",
         "make", "-j#{config.jobs}", "install-modular-gc", "MODULAR_GC=mmtk", "MMTK_BUILD=release",
         chdir: File.join(build_root, "modular-build"),
-        env: { "CARGO_HOME" => File.join(config.work_dir, "cargo-home") })
+        env: {
+          "CARGO_HOME" => File.join(config.work_dir, "cargo-home"),
+          "RUSTUP_TOOLCHAIN" => RUST_TOOLCHAIN,
+        })
+      if File.read(log_path, mode: "rb")[log_offset..].include?("cross-language LTO disabled")
+        Dir[File.join(gc_dir, "librubygc.mmtk.*")].each { |path| File.delete(path) }
+        raise CommandError, "MMTk was built without cross-language LTO: no Clang matches the LLVM " \
+          "version of Rust #{RUST_TOOLCHAIN}; install it (see #{log_path})"
+      end
       unless Dir[File.join(gc_dir, "librubygc.mmtk.*")].any?
         raise CommandError, "MMTk build did not install librubygc.mmtk in #{gc_dir}"
       end
@@ -428,6 +453,7 @@ module MMTkBenchmark
         "frequency" => "weekly",
         "plan" => "StickyImmix",
         "heap_modes" => %w[dynamic ruby cpu],
+        "rust_toolchain" => RUST_TOOLCHAIN,
         "warmup_iterations" => config.warmup,
         "minimum_iterations" => config.iterations,
         "minimum_seconds" => config.min_time,
